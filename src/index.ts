@@ -1,1 +1,1 @@
-console.log('desde ts');
+console.log('desde ts con node');
