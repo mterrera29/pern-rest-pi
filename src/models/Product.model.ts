@@ -19,3 +19,4 @@ class Product extends Model {
   })
   availability: boolean;
 }
+export default Product;
