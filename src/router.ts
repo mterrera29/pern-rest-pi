@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
   res.json('desde get');
 });
 
-router.post('/', createProduct);
+router.post('/products', createProduct);
 
 router.put('/', (req, res) => {
   res.json('desde put');
