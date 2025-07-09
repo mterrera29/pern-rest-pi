@@ -1,11 +1,12 @@
 import { Router } from 'express';
-import { createProduct, getProduct } from './handlers/product';
+import { createProduct, getProduct, getProductById } from './handlers/product';
 import { body, check, validationResult } from 'express-validator';
 import { handleInputErrors } from './middleware';
 
 const router = Router();
 
 router.get('/products', getProduct);
+router.get('/products/:id', getProductById);
 
 router.post(
   '/products',
