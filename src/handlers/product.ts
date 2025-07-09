@@ -1,10 +1,14 @@
 import { Request, Response } from 'express';
 import Product from '../models/Product.model';
+import { UpdatedAt } from 'sequelize-typescript';
 
 export const getProduct = async (req: Request, res: Response) => {
   try {
-    const product = await Product.findAll();
-    res.json({ data: product });
+    const products = await Product.findAll({
+      order: [['price', 'DESC']],
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
+    });
+    res.json({ data: products });
   } catch (error) {
     console.log(error);
   }
