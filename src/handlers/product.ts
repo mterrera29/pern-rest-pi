@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
-export const createProduct = (req: Request, res: Response) => {
-  console.log(req.body);
+import Product from '../models/Product.model';
+export const createProduct = async (req: Request, res: Response) => {
+  const product = new Product(req.body);
+  product.save();
   res.json('desde post');
 };
