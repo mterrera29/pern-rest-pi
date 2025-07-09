@@ -6,9 +6,11 @@ import { handleInputErrors } from './middleware';
 const router = Router();
 
 router.get('/products', getProduct);
+
 router.get(
   '/products/:id',
   param('id').isInt().withMessage('ID no válido'),
+  handleInputErrors,
   getProductById
 );
 
