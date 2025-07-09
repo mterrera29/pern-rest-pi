@@ -18,7 +18,7 @@ router.post(
     .isNumeric()
     .withMessage('Valor no valido')
     .custom((value) => value > 0)
-    .withMessage('El valor debe ser mayor que 0'),
+    .withMessage('Precio no valido'),
   handleInputErrors,
   createProduct
 );
