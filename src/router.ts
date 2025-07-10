@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import {
   createProduct,
+  deleteProduct,
   getProduct,
   getProductById,
   updateAvaibility,
@@ -36,6 +37,7 @@ router.post(
 
 router.put(
   '/products/:id',
+  param('id').isInt().withMessage('ID no válido'),
   body('name').notEmpty().withMessage('El nombre no puede ir vacio'),
   body('price')
     .notEmpty()
@@ -49,10 +51,18 @@ router.put(
   updateProduct
 );
 
-router.patch('/products/:id', updateAvaibility);
+router.patch(
+  '/products/:id',
+  param('id').isInt().withMessage('ID no válido'),
+  handleInputErrors,
+  updateAvaibility
+);
 
-router.delete('/', (req, res) => {
-  res.json('desde delete');
-});
+router.delete(
+  '/products/:id',
+  param('id').isInt().withMessage('ID no válido'),
+  handleInputErrors,
+  deleteProduct
+);
 
 export default router;
