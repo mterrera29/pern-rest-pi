@@ -36,3 +36,8 @@ export const createProduct = async (req: Request, res: Response) => {
     console.log(error);
   }
 };
+
+export const updateProduct = async (req, res) => {
+  const product = req.params;
+  res.json({ data: product });
+};

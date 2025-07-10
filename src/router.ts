@@ -1,5 +1,10 @@
 import { Router } from 'express';
-import { createProduct, getProduct, getProductById } from './handlers/product';
+import {
+  createProduct,
+  getProduct,
+  getProductById,
+  updateProduct,
+} from './handlers/product';
 import { body, param } from 'express-validator';
 import { handleInputErrors } from './middleware';
 
@@ -28,9 +33,7 @@ router.post(
   createProduct
 );
 
-router.put('/', (req, res) => {
-  res.json('desde put');
-});
+router.put('/products/:id', updateProduct);
 
 router.patch('/', (req, res) => {
   res.json('desde put');
