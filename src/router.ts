@@ -33,7 +33,20 @@ router.post(
   createProduct
 );
 
-router.put('/products/:id', updateProduct);
+router.put(
+  '/products/:id',
+  body('name').notEmpty().withMessage('El nombre no puede ir vacio'),
+  body('price')
+    .notEmpty()
+    .withMessage('El nombre no puede ir vacio')
+    .isNumeric()
+    .withMessage('Valor no valido')
+    .custom((value) => value > 0)
+    .withMessage('Precio no valido'),
+  body('availability').isBoolean().withMessage('No puede ir vacio'),
+  handleInputErrors,
+  updateProduct
+);
 
 router.patch('/', (req, res) => {
   res.json('desde put');
