@@ -3,6 +3,7 @@ import {
   createProduct,
   getProduct,
   getProductById,
+  updateAvaibility,
   updateProduct,
 } from './handlers/product';
 import { body, param } from 'express-validator';
@@ -48,9 +49,7 @@ router.put(
   updateProduct
 );
 
-router.patch('/', (req, res) => {
-  res.json('desde put');
-});
+router.patch('/products/:id', updateAvaibility);
 
 router.delete('/', (req, res) => {
   res.json('desde delete');
