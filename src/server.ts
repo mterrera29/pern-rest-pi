@@ -7,7 +7,7 @@ async function connectDB() {
   try {
     await db.authenticate();
     db.sync();
-    console.log(colors.blue('Conexión exitosa de BBDD'));
+    // console.log(colors.blue('Conexión exitosa de BBDD'));
   } catch (error) {
     console.log(colors.red(error));
   }
@@ -21,7 +21,7 @@ server.use(express.json());
 
 server.use('/', router);
 
-server.use('/', (req, res) => {
+server.get('/api', (req, res) => {
   res.json({ data: 'Desde API' });
 });
 export default server;

@@ -1,5 +1,9 @@
-describe('Nuestro primer Test!', () => {
-  it('1+1=2', () => {
-    expect(1 + 1).toBe(2);
+import request from 'supertest';
+import server from '../server';
+
+describe('GET /api', () => {
+  it('should send back a json response', async () => {
+    const res = await request(server).get('/api');
+    console.log(res);
   });
 });
