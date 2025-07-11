@@ -20,4 +20,8 @@ const server = express();
 server.use(express.json());
 
 server.use('/', router);
+
+server.use('/', (req, res) => {
+  res.json({ data: 'Desde API' });
+});
 export default server;
