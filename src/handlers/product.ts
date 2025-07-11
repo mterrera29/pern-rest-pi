@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import Product from '../models/Product.model';
-import { UpdatedAt } from 'sequelize-typescript';
 
 export const getProduct = async (req: Request, res: Response) => {
   try {
