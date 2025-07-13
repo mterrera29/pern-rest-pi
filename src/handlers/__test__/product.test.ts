@@ -2,6 +2,13 @@ import request from 'supertest';
 import server from '../../server';
 
 describe('POST /products', () => {
+  it('validar errores', async () => {
+    const response = await request(server).post('/products').send({});
+
+    expect(response.status).toBe(400);
+    expect(response.body).toHaveProperty('errors');
+  });
+
   it('crear nuevo producto', async () => {
     const response = await request(server).post('/products').send({
       name: 'Televisor',
@@ -13,5 +20,6 @@ describe('POST /products', () => {
 
     expect(response.status).not.toBe(400);
     expect(response.status).not.toBe(200);
+    expect(response.body).not.toHaveProperty('errors');
   });
 });
