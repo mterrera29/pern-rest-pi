@@ -7,6 +7,10 @@ describe('POST /products', () => {
 
     expect(response.status).toBe(400);
     expect(response.body).toHaveProperty('errors');
+    expect(response.body.errors).toHaveLength(4);
+
+    expect(response.status).not.toBe(401);
+    expect(response.body.errors).not.toHaveLength(2);
   });
 
   it('crear nuevo producto', async () => {
