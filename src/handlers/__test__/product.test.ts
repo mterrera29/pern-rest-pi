@@ -13,6 +13,21 @@ describe('POST /products', () => {
     expect(response.body.errors).not.toHaveLength(2);
   });
 
+  it('validar precio mayor a 0', async () => {
+    const response = await request(server).post('/products').send({
+      name: 'Televisor',
+      price: 0,
+      availability: true,
+    });
+
+    expect(response.status).toBe(400);
+    expect(response.body).toHaveProperty('errors');
+    expect(response.body.errors).toHaveLength(1);
+
+    expect(response.status).not.toBe(401);
+    expect(response.body.errors).not.toHaveLength(2);
+  });
+
   it('crear nuevo producto', async () => {
     const response = await request(server).post('/products').send({
       name: 'Televisor',
