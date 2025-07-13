@@ -10,5 +10,8 @@ describe('POST /products', () => {
     });
     expect(response.status).toEqual(201);
     expect(response.body).toHaveProperty('data');
+
+    expect(response.status).not.toBe(400);
+    expect(response.status).not.toBe(200);
   });
 });
