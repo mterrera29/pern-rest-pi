@@ -45,6 +45,11 @@ describe('POST /products', () => {
 });
 
 describe('GET /products', () => {
+  it('que la url exista', async () => {
+    const response = await request(server).get('/products');
+    expect(response.status).not.toBe(404);
+  });
+
   it('respuesta GET con Json', async () => {
     const response = await request(server).get('/products');
     expect(response.status).toBe(200);
@@ -53,6 +58,5 @@ describe('GET /products', () => {
     expect(response.body.data).toHaveLength(1);
 
     expect(response.body).not.toHaveProperty('errors');
-    expect(response.status).not.toBe(404);
   });
 });
