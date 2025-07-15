@@ -44,10 +44,12 @@ describe('POST /products', () => {
   });
 });
 
-describe('GET /products', async () => {
-  const response = await request(server).get('api/products');
-  expect(response.status).toBe(200);
-  expect(response.headers['content-type']).toMatch(/json/);
-  expect(response.body).toHaveProperty('data');
-  expect(response.body.data).toHaveLength(1);
+describe('GET /products', () => {
+  it('respuesta GET con Json', async () => {
+    const response = await request(server).get('/products');
+    expect(response.status).toBe(200);
+    expect(response.headers['content-type']).toMatch(/json/);
+    expect(response.body).toHaveProperty('data');
+    expect(response.body.data).toHaveLength(1);
+  });
 });
