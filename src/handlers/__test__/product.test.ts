@@ -51,5 +51,8 @@ describe('GET /products', () => {
     expect(response.headers['content-type']).toMatch(/json/);
     expect(response.body).toHaveProperty('data');
     expect(response.body.data).toHaveLength(1);
+
+    expect(response.body).not.toHaveProperty('errors');
+    expect(response.status).not.toBe(404);
   });
 });
