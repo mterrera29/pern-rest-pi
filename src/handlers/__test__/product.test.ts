@@ -49,4 +49,5 @@ describe('GET /products', async () => {
   expect(response.status).toBe(200);
   expect(response.headers['content-type']).toMatch(/json/);
   expect(response.body).toHaveProperty('data');
+  expect(response.body.data).toHaveLength(1);
 });
