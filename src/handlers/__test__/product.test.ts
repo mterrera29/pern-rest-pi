@@ -1,5 +1,6 @@
 import request from 'supertest';
 import server from '../../server';
+import { response } from 'express';
 
 describe('POST /products', () => {
   it('validar errores', async () => {
@@ -41,4 +42,11 @@ describe('POST /products', () => {
     expect(response.status).not.toBe(200);
     expect(response.body).not.toHaveProperty('errors');
   });
+});
+
+describe('GET /products', async () => {
+  const response = await request(server).get('api/products');
+  expect(response.status).toBe(200);
+  expect(response.headers['content-type']).toMatch(/json/);
+  expect(response.body).toHaveProperty('data');
 });
