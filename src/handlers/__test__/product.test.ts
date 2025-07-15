@@ -60,3 +60,10 @@ describe('GET /products', () => {
     expect(response.body).not.toHaveProperty('errors');
   });
 });
+
+describe('GET /products/:id', () => {
+  it('Should return a 404 response for a non-existent product', async () => {
+    const productID = 2000;
+    const response = await request(server).get('/');
+  });
+});
