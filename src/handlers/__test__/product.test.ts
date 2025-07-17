@@ -70,4 +70,13 @@ describe('GET /products/:id', () => {
     expect(response.body).toHaveProperty('error');
     expect(response.body.error).toBe('Producto no encontrado');
   });
+
+  it('sould check a valid ID in the URL', async () => {
+    const response = await request(server).get(`/products/not-valid-url}`);
+
+    expect(response.status).toBe(400);
+    expect(response.body).toHaveProperty('errors');
+    expect(response.body.errors).toHaveLength(1);
+    expect(response.body.errors[0].msg).toBe('ID no válido');
+  });
 });
