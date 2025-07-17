@@ -72,11 +72,18 @@ describe('GET /products/:id', () => {
   });
 
   it('sould check a valid ID in the URL', async () => {
-    const response = await request(server).get(`/products/not-valid-url}`);
+    const response = await request(server).get(`/products/not-valid-url`);
 
     expect(response.status).toBe(400);
     expect(response.body).toHaveProperty('errors');
     expect(response.body.errors).toHaveLength(1);
     expect(response.body.errors[0].msg).toBe('ID no válido');
+  });
+
+  it('get a JSON response, single product', async () => {
+    const response = await request(server).get(`/products/1`);
+
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveProperty('data');
   });
 });
