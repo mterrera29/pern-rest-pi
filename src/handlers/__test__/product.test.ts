@@ -89,6 +89,14 @@ describe('GET /products/:id', () => {
 });
 
 describe('PUT /products/:id', () => {
+  it('sould check a valid ID in the URL', async () => {
+    const response = await request(server).put(`/products/not-valid-url`);
+
+    expect(response.status).toBe(400);
+    expect(response.body).toHaveProperty('errors');
+    expect(response.body.errors).toHaveLength(1);
+    expect(response.body.errors[0].msg).toBe('ID no válido');
+  });
   it('validating erros in update', async () => {
     const response = await request(server).put(`/products/1`).send({});
 
