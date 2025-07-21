@@ -88,4 +88,10 @@ describe('GET /products/:id', () => {
   });
 });
 
-describe('PUT /api/products/:id', () => {});
+describe('PUT /products/:id', () => {
+  it('validating erros in update', async () => {
+    const response = await request(server).put(`/products/1`).send({});
+
+    expect(response.status).toBe(200);
+  });
+});
