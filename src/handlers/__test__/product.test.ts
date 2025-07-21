@@ -87,3 +87,5 @@ describe('GET /products/:id', () => {
     expect(response.body).toHaveProperty('data');
   });
 });
+
+describe('PUT /api/products/:id', () => {});
