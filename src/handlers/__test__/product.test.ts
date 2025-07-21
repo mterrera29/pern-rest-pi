@@ -100,4 +100,20 @@ describe('PUT /products/:id', () => {
     expect(response.status).not.toBe(200);
     expect(response.body).not.toHaveProperty('data');
   });
+
+  it('price is greater than 0 ', async () => {
+    const response = await request(server).put(`/products/1`).send({
+      name: 'Monitor Nuevo',
+      price: -1000,
+      availability: false,
+    });
+
+    expect(response.status).toBe(400);
+    expect(response.body).toHaveProperty('errors');
+    expect(response.body.errors).toBeTruthy();
+    expect(response.body.errors).toHaveLength(1);
+
+    expect(response.status).not.toBe(200);
+    expect(response.body).not.toHaveProperty('data');
+  });
 });
