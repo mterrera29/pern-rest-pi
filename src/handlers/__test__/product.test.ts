@@ -90,13 +90,18 @@ describe('GET /products/:id', () => {
 
 describe('PUT /products/:id', () => {
   it('sould check a valid ID in the URL', async () => {
-    const response = await request(server).put(`/products/not-valid-url`);
+    const response = await request(server).put(`/products/not-valid-url`).send({
+      name: 'Monitor Nuevo',
+      price: 1000,
+      availability: false,
+    });
 
     expect(response.status).toBe(400);
     expect(response.body).toHaveProperty('errors');
     expect(response.body.errors).toHaveLength(1);
     expect(response.body.errors[0].msg).toBe('ID no válido');
   });
+
   it('validating erros in update', async () => {
     const response = await request(server).put(`/products/1`).send({});
 
@@ -110,6 +115,22 @@ describe('PUT /products/:id', () => {
   });
 
   it('price is greater than 0 ', async () => {
+    const response = await request(server).put(`/products/1`).send({
+      name: 'Monitor Nuevo',
+      price: -1000,
+      availability: false,
+    });
+
+    expect(response.status).toBe(400);
+    expect(response.body).toHaveProperty('errors');
+    expect(response.body.errors).toBeTruthy();
+    expect(response.body.errors).toHaveLength(1);
+
+    expect(response.status).not.toBe(200);
+    expect(response.body).not.toHaveProperty('data');
+  });
+
+  it('non-existent product', async () => {
     const response = await request(server).put(`/products/1`).send({
       name: 'Monitor Nuevo',
       price: -1000,
