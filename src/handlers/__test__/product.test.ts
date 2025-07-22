@@ -131,9 +131,10 @@ describe('PUT /products/:id', () => {
   });
 
   it('non-existent product', async () => {
-    const response = await request(server).put(`/products/1`).send({
+    const productID = 2000;
+    const response = await request(server).put(`/products/${productID}`).send({
       name: 'Monitor Nuevo',
-      price: -1000,
+      price: 1000,
       availability: false,
     });
 
