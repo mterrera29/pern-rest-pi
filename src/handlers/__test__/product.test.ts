@@ -159,6 +159,32 @@ describe('PUT /products/:id', () => {
   });
 });
 
+describe('PUT /products/:id', () => {
+  it('non-existent product', async () => {
+    const productID = 2000;
+    const response = await request(server).patch(`/products/${productID}`);
+
+    expect(response.status).toBe(404);
+    expect(response.body.error).toBe('Producto no encontrado');
+    expect(response.status).not.toBe(200);
+    expect(response.body).not.toHaveProperty('data');
+  });
+
+  it('update valid data', async () => {
+    const productID = 2000;
+    const response = await request(server).put(`/products/1`).send({
+      name: 'Monitor Nuevo',
+      price: 1000,
+      availability: false,
+    });
+
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveProperty('data');
+    expect(response.status).not.toBe(400);
+    expect(response.body).not.toHaveProperty('errors');
+  });
+});
+
 describe('DELETE /products/:id', () => {
   it('sould check a valid ID in the URL', async () => {
     const response = await request(server).delete(`/products/not-valid-url`);
