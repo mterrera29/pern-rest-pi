@@ -139,22 +139,24 @@ describe('PUT /products/:id', () => {
     });
 
     expect(response.status).toBe(404);
-    expect(response.body).toBe('Producto no encontrado');
+    expect(response.body.error).toBe('Producto no encontrado');
     expect(response.status).not.toBe(200);
     expect(response.body).not.toHaveProperty('data');
   });
 
   it('update valid data', async () => {
     const productID = 2000;
-    const response = await request(server).put(`/products/${productID}`).send({
+    const response = await request(server).put(`/products/1`).send({
       name: 'Monitor Nuevo',
       price: 1000,
       availability: false,
     });
 
-    expect(response.status).toBe(404);
-    expect(response.body).toBe('Producto no encontrado');
-    expect(response.status).not.toBe(200);
-    expect(response.body).not.toHaveProperty('data');
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveProperty('data');
+    expect(response.status).not.toBe(400);
+    expect(response.body).not.toHaveProperty('errors');
   });
 });
+
+describe('PUT /products/:id', () => {});
