@@ -27,7 +27,7 @@ describe('connectDB', () => {
     const consoleSpy = jest.spyOn(console, 'log');
     await connectDB();
     expect(consoleSpy).toHaveBeenCalledWith(
-      expect.stringContaining('Hubo un error al conectar a la BD')
+      expect.stringContaining('Hubo un error al conectar a la DB')
     );
   });
 });

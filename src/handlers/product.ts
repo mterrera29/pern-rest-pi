@@ -2,15 +2,11 @@ import { Request, Response } from 'express';
 import Product from '../models/Product.model';
 
 export const getProduct = async (req: Request, res: Response) => {
-  try {
-    const products = await Product.findAll({
-      order: [['price', 'DESC']],
-      attributes: { exclude: ['createdAt', 'updatedAt'] },
-    });
-    res.json({ data: products });
-  } catch (error) {
-    console.log(error);
-  }
+  const products = await Product.findAll({
+    order: [['price', 'DESC']],
+    attributes: { exclude: ['createdAt', 'updatedAt'] },
+  });
+  res.json({ data: products });
 };
 
 export const getProductById = async (req: Request, res: Response) => {
@@ -28,12 +24,8 @@ export const getProductById = async (req: Request, res: Response) => {
 };
 
 export const createProduct = async (req: Request, res: Response) => {
-  try {
-    const product = await Product.create(req.body);
-    res.status(201).json({ data: product });
-  } catch (error) {
-    console.log(error);
-  }
+  const product = await Product.create(req.body);
+  res.status(201).json({ data: product });
 };
 
 export const updateProduct = async (req: Request, res: Response) => {
