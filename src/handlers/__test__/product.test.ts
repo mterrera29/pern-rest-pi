@@ -168,4 +168,22 @@ describe('DELETE /products/:id', () => {
     expect(response.body.errors).toHaveLength(1);
     expect(response.body.errors[0].msg).toBe('ID no válido');
   });
+  it('non-existent product', async () => {
+    const productID = 2000;
+    const response = await request(server).delete(`/products/${productID}`);
+
+    expect(response.status).toBe(404);
+    expect(response.body.error).toBe('Producto no encontrado');
+    expect(response.status).not.toBe(200);
+    expect(response.body).not.toHaveProperty('data');
+  });
+
+  it('delete valid data', async () => {
+    const response = await request(server).delete(`/products/1`);
+
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveProperty('data');
+    expect(response.status).not.toBe(400);
+    expect(response.status).not.toBe(404);
+  });
 });
