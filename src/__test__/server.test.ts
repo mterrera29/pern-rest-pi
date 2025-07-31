@@ -24,5 +24,7 @@ describe('connectDB', () => {
     jest
       .spyOn(db, 'authenticate')
       .mockRejectedValueOnce(new Error('Hubo un error al conectar a la DB'));
+    const consoleSpy = jest.spyOn(console, 'log');
+    await connectDB();
   });
 });
