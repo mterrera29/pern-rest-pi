@@ -159,7 +159,7 @@ describe('PUT /products/:id', () => {
   });
 });
 
-describe('PUT /products/:id', () => {
+describe('PATCH /products/:id', () => {
   it('non-existent product', async () => {
     const productID = 2000;
     const response = await request(server).patch(`/products/${productID}`);
@@ -172,7 +172,7 @@ describe('PUT /products/:id', () => {
 
   it('update valid data', async () => {
     const productID = 2000;
-    const response = await request(server).put(`/products/1`).send({
+    const response = await request(server).patch(`/products/1`).send({
       name: 'Monitor Nuevo',
       price: 1000,
       availability: false,
